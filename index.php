@@ -44,10 +44,10 @@ echo "<script language=javascript> alert(\"Please Enter second value.\");</scrip
 <form>
 <table style="border:groove #00FF99">
             <tr>
-                <td style="background-color:aqua; color:red; font-family:'Times New Roman'">Enter First Number</td>
+                <td style="background-color:aqua; color:red; font-family:'Times New Roman'">Enter 1st Number</td>
                 <td colspan="1">
                
-                    <input name="fvalue" type="text" style="color:red"/></td>
+                    <input name="fvalue" type="text" style="color:Black"/></td>
             <tr>
                 <td style="color:burlywood; font-family:'Times New Roman'">Select Operator</td>
                 <td>
@@ -59,9 +59,9 @@ echo "<script language=javascript> alert(\"Please Enter second value.\");</scrip
 </select></td>
                </tr>
             <tr>
-                <td style="background-color:aqua; color:red; font-family:'Times New Roman'">Enter First Number</td>
+                <td style="background-color:aqua; color:red; font-family:'Times New Roman'">Enter 2nd Number</td>
                 <td class="auto-style5">
-                    <input name="lvalue" type="text"  style="color:red"/></td>
+                    <input name="lvalue" type="text"  style="color:Black"/></td>
                
             </tr>
             <tr>
