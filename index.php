@@ -1,51 +1,78 @@
 <?php
-/* Set the default timezone */
-date_default_timezone_set("America/Montreal");
-
-/* Set the date */
-$date = strtotime(date("Y-m-d"));
-
-$day = date('d', $date);
-$month = date('m', $date);
-$year = date('Y', $date);
-$firstDay = mktime(0,0,0,$month, 1, $year);
-$title = strftime('%B', $firstDay);
-$dayOfWeek = date('D', $firstDay);
-$daysInMonth = cal_days_in_month(0, $month, $year);
-/* Get the name of the week days */
-$timestamp = strtotime('next Sunday');
-$weekDays = array();
-for ($i = 0; $i < 7; $i++) {
-	$weekDays[] = strftime('%a', $timestamp);
-	$timestamp = strtotime('+1 day', $timestamp);
+ini_set('display_errors',0);
+if( isset( $_REQUEST['calculate'] ))
+{
+$operator=$_REQUEST['operator'];
+if($operator=="+")
+{
+$add1 = $_REQUEST['fvalue'];
+$add2 = $_REQUEST['lvalue'];
+$res= $add1+$add2;
 }
-$blank = date('w', strtotime("{$year}-{$month}-01"));
+if($operator=="-")
+{
+$add1 = $_REQUEST['fvalue'];
+$add2 = $_REQUEST['lvalue'];
+$res= $add1-$add2;
+}
+if($operator=="*")
+{
+$add1 = $_REQUEST['fvalue'];
+$add2 = $_REQUEST['lvalue'];
+$res =$add1*$add2;
+}
+if($operator=="/")
+{
+$add1 = $_REQUEST['fvalue'];
+$add2 = $_REQUEST['lvalue'];
+$res= $add1/$add2;
+}
+if($_REQUEST['fvalue']==NULL && $_REQUEST['lvalue']==NULL)
+{
+echo "<script language=javascript> alert(\"Please Enter values.\");</script>";
+}
+else if($_REQUEST['fvalue']==NULL)
+{
+echo "<script language=javascript> alert(\"Please Enter First value.\");</script>";
+}
+else if($_REQUEST['lvalue']==NULL)
+{
+echo "<script language=javascript> alert(\"Please Enter second value.\");</script>";
+}
+}
 ?>
-<table class='table table-bordered' style="table-layout: fixed;">
-	<tr>
-		<th colspan="7" class="text-center"> <?php echo $title ?> <?php echo $year ?> </th>
-	</tr>
-	<tr>
-		<?php foreach($weekDays as $key => $weekDay) : ?>
-			<td class="text-center"><?php echo $weekDay ?></td>
-		<?php endforeach ?>
-	</tr>
-	<tr>
-		<?php for($i = 0; $i < $blank; $i++): ?>
-			<td></td>
-		<?php endfor; ?>
-		<?php for($i = 1; $i <= $daysInMonth; $i++): ?>
-			<?php if($day == $i): ?>
-				<td><strong><?php echo $i ?></strong></td>
-			<?php else: ?>
-				<td><?php echo $i ?></td>
-			<?php endif; ?>
-			<?php if(($i + $blank) % 7 == 0): ?>
-				</tr><tr>
-			<?php endif; ?>
-		<?php endfor; ?>
-		<?php for($i = 0; ($i + $blank + $daysInMonth) % 7 != 0; $i++): ?>
-			<td></td>
-		<?php endfor; ?>
-	</tr>
-</table>
+<form>
+<table style="border:groove #00FF99">
+            <tr>
+                <td style="background-color:aqua; color:red; font-family:'Times New Roman'">Enter First Number</td>
+                <td colspan="1">
+               
+                    <input name="fvalue" type="text" style="color:red"/></td>
+            <tr>
+                <td style="color:burlywood; font-family:'Times New Roman'">Select Operator</td>
+                <td>
+                    <select name="operator" style="width: 63px">
+<option>+</option>
+<option>-</option>
+<option>*</option>
+<option>/</option>
+</select></td>
+               </tr>
+            <tr>
+                <td style="background-color:aqua; color:red; font-family:'Times New Roman'">Enter First Number</td>
+                <td class="auto-style5">
+                    <input name="lvalue" type="text"  style="color:red"/></td>
+               
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="calculate" value="Calculate" style="color:wheat;background-color:rosybrown" /></td>
+               
+            </tr>
+            <tr>
+                <td style="background-color:aqua;color:red">Output = </td>
+                <td style="color:darkblue"><?php echo $res;?></td>
+               
+            </tr>
+       </table>
+ </form>
